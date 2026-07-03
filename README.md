@@ -43,7 +43,7 @@ An AI-powered career assistant built using **n8n**, **Groq LLM**, **Conversation
 - AI Agents
 - Prompt Engineering
 
-  ## Workflow
+ ## Workflow
 
 User Prompt
 → AI Agent
