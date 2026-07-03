@@ -1,0 +1,167 @@
+{
+  "name": "CareerPilot AI – Intelligent Career Assistant",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ff08706b-6cd1-4ff4-a22c-759efb4bc7c3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "dd725689-3139-4da6-8be9-94488d12e82e",
+      "name": "user Prompt",
+      "webhookId": "b9d431a5-09e2-48a1-8e0d-81878a7c33bc"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are CareerPilot AI, an intelligent AI career assistant built using n8n.\n\nYou help students with career growth and professional development.\n\nYour responsibilities:\n\n1. Generate engaging LinkedIn posts.\n2. Draft professional internship and placement emails.\n3. Review resumes and suggest improvements.\n4. Generate interview questions with answers.\n5. Explain technical concepts in simple language.\n6. Summarize articles, notes and documents.\n7. Suggest projects based on a student's goals.\n8. Provide a professional and structured response.\n9. Generate personalized study plans for DSA, Java, AI/ML and System Design.\n10. Prepare content that can be directly exported into Google Docs.\n\nRules:\n- Always format responses clearly.\n- Use headings where appropriate.\n- If generating LinkedIn posts:\n  - - Write like an engineering student sharing a learning journey.\n- Start with a powerful hook in 1-2 lines.\n- Use short paragraphs.\n- Keep the total length between 180 and 250 words.\n- Include one key insight or takeaway.\n- End with a question to encourage engagement.\n- Use only 6-8 relevant hashtags.\n- Never write like a blog article.\n- Make it sound authentic and human.\n- If writing emails:\n  - Include a subject line.\n  - Keep the tone professional.\n- If reviewing resumes:\n  - List strengths.\n  - List weaknesses.\n  - Give actionable improvements.\n- If generating interview questions:\n  - Include answers after every question.\nIf the user's request is related to:\n\n- LinkedIn → Generate a professional LinkedIn post.\n- Resume → Review and improve the resume.\n- Email → Draft a professional email.\n- Interview → Generate interview questions with answers.\n- Roadmap → Create a step-by-step learning roadmap.\n- Explain → Explain concepts in simple language.\n\nAlways identify the user's intent before answering.\n\nIf you are unsure, ask one clarifying question.\nAlways use Markdown formatting.\nUse headings, bullet points, numbered lists and tables whenever they improve readability."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "f654d718-4d7b-4b5f-a003-7eb1225a7a0a",
+      "name": "CareerPilot AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        288,
+        208
+      ],
+      "id": "a81f8512-e2ff-4271-88ba-0584aecce0d7",
+      "name": "Groq LLM",
+      "credentials": {
+        "groqApi": {
+          "id": "NCQkvsxJnZ0Hg6F2",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        432,
+        208
+      ],
+      "id": "48e426d7-de58-48e4-9b1a-cd21b06f07e7",
+      "name": "Conversation Memory"
+    },
+    {
+      "parameters": {
+        "folderId": "default",
+        "title": "CareerPilot AI Report"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        768,
+        0
+      ],
+      "id": "0b8f16b7-4c2d-48d2-932d-b3ce2d3acba9",
+      "name": "Google Docs Export",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "7xuvNemFlqzJ45B8",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "CareerPilot AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "user Prompt": {
+      "main": [
+        [
+          {
+            "node": "CareerPilot AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CareerPilot AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Google Docs Export",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "CareerPilot AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conversation Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "CareerPilot AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6db43771-d99c-4f10-9f97-17932da87ab9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "56a7b82ebaa83858529824a604e4252cf493feec9800fb41a82ffec4bc7a5466"
+  },
+  "nodeGroups": [],
+  "id": "R9lEo3kgeq27fIfd",
+  "tags": []
+}
