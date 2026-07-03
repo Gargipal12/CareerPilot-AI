@@ -4,13 +4,14 @@ An AI-powered career assistant built using **n8n**, **Groq LLM**, **Conversation
 
 ## Features
 
-- 📄 Resume Review
-- 💼 Interview Question Generator
-- ✉️ Professional Email Generator
-- 📝 LinkedIn Post Generator
-- 🗺️ Learning Roadmap Generator
-- 🧠 Conversational Memory
-- 📂 Google Docs Export
+-Generate professional LinkedIn posts
+- Review resumes and provide improvement suggestions
+- Draft internship and placement emails
+- Generate interview questions with answers
+- Create personalized learning roadmaps
+- Explain technical concepts in a beginner-friendly way
+- Maintain conversation context using memory
+- Export generated content to Google Docs
 
 ## Architecture
 
@@ -41,6 +42,23 @@ An AI-powered career assistant built using **n8n**, **Groq LLM**, **Conversation
 - Google Docs
 - AI Agents
 - Prompt Engineering
+
+  ## Workflow
+
+User Prompt
+→ AI Agent
+→ Groq LLM
+→ Conversation Memory
+→ Google Docs Export
+
+## Skills Demonstrated
+
+- AI Agent Development
+- Workflow Automation
+- LLM Integration
+- Prompt Engineering
+- Conversational Memory
+- Google Workspace Integration
 
 ## Future Improvements
 
