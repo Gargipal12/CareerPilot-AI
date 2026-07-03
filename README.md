@@ -1,4 +1,4 @@
-# CareerPilot AI
+# CareerPilot AI -Intelligent Career Assistant
 
 An AI-powered career assistant built using **n8n**, **Groq LLM**, **Conversation Memory**, and **Google Docs** automation.
 
